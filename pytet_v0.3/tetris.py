@@ -79,8 +79,8 @@ class Tetris():
         nDeleted = 0
         nScanned = self.currBlk.get_dy()
 
-        if self.top + self.currBlk.get_dy() >= self.iScreenDy:
-            nScanned = self.iScreenDy - self.top
+        if self.top + self.currBlk.get_dy() - 1 >= self.iScreenDy:
+            nScanned -= (self.top + self.currBlk.get_dy() - self.iScreenDy)
 
         arrayScreen = self.createArrayScreen()
         nScreen = Matrix(arrayScreen)
@@ -98,7 +98,7 @@ class Tetris():
         return self.oScreen
  
     def accept(self, key): # To be implemented!!
-        if key not in ['a', 'd', 's', 'w', ' ']:
+        if key in ['00', '01', '02', '03', '04', '05', '06']:
             print()
             self.state = TetrisState.NewBlock
             self.idxBlockType = int(key)
@@ -125,6 +125,10 @@ class Tetris():
                 if self.tempBlk.anyGreaterThan(1):
                     self.top -= 1
                     self.state = TetrisState.NewBlock
+        elif key in ['00', '01', '02', '03', '04', '05', '06']:
+            pass
+        else:
+            print("Wrong key!")
 
         self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
         self.tempBlk = self.iScreen.clip(self.top, self.left, self.top+self.currBlk.get_dy(), self.left+self.currBlk.get_dx())
@@ -142,7 +146,8 @@ class Tetris():
                 self.idxBlockDegree = (self.idxBlockDegree - 1) % Tetris.nBlockDegrees
             elif key == ' ':
                 print("Wrong")
-        
+            
+            self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
             self.tempBlk = self.iScreen.clip(self.top, self.left, self.top+self.currBlk.get_dy(), self.left+self.currBlk.get_dx())
             self.tempBlk = self.tempBlk + self.currBlk
 
