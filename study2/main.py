@@ -82,9 +82,7 @@ if __name__ == "__main__":
         
         if key != 'q':
           state = board.accept(key)
-#          board.oScreen.print()
           board.printScreen()
-#          board.oScreen.print()
           
           if(state == TetrisState.NewBlock):
               idxBlockType = randint(0, 6)
