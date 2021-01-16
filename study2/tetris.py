@@ -117,8 +117,8 @@ class Tetris():
                 nScreen.insert(0, nline)
             elif delete == False:
                 y -= 1
-        self.oScreen = Matrix(nScreen)
 
+        self.oScreen = Matrix(nScreen)
         return self.oScreen
 
     def accept(self, key): # To be implemented!!
@@ -176,7 +176,6 @@ class Tetris():
                             break
                     if crash == True:
                         break
-
         elif key in ['00', '01', '02', '03', '04', '05', '06']:
             pass
         else:
