@@ -100,6 +100,10 @@ class Tetris():
                     #continue
             print()
 
+    def set_blocks(self):
+        self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
+        self.tempBlk = self.iScreen.clip(self.top, self.left, self.top + self.currBlk.get_dy(), self.left + self.currBlk.get_dx())
+
     def check_crash(self):
         test1 = self.currBlk.get_array()
         test2 = self.tempBlk.get_array()
@@ -143,8 +147,7 @@ class Tetris():
             self.idxBlockType = (1 + self.idxBlockType) % Tetris.nBlockTypes
             self.idxBlockDegree = 0
 
-            self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
-            self.tempBlk = self.iScreen.clip(self.top, self.left, self.top + self.currBlk.get_dy(), self.left + self.currBlk.get_dx())
+            self.set_blocks()
 
             crash = self.check_crash()
             if crash == True:
@@ -164,7 +167,7 @@ class Tetris():
             crash = False
             while crash == False:
                 self.top += 1
-                self.tempBlk = self.iScreen.clip(self.top, self.left, self.top + self.currBlk.get_dy(), self.left + self.currBlk.get_dx())
+                self.set_blocks()
                 crash = self.check_crash()
                 if crash == True:
                     self.top -= 1
@@ -176,8 +179,7 @@ class Tetris():
         else:
             print("Wrong key!")
 
-        self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
-        self.tempBlk = self.iScreen.clip(self.top, self.left, self.top+self.currBlk.get_dy(), self.left+self.currBlk.get_dx())
+        self.set_blocks()
 
         crash = False
         crash = self.check_crash()
