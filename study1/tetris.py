@@ -139,7 +139,7 @@ class Tetris():
                 self.left -= 1
             elif key == 's':
                 self.top -= 1
-                self.state = TetrisState.Newblock
+                self.state = TetrisState.NewBlock
             elif key == 'w':
                 self.idxBlockDegree = (self.idxBlockDegree - 1) % Tetris.nBlockDegrees
             elif key == ' ':
