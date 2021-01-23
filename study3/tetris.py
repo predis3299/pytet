@@ -151,6 +151,7 @@ class Tetris():
 
             crash = self.check_crash()
             if crash == True:
+                self.state = TetrisState.Finished
                 return self.state
 
         self.state = TetrisState.Running
@@ -197,8 +198,7 @@ class Tetris():
             elif key == ' ':
                 print("Wrong")
             
-            self.currBlk = Tetris.setOfBlockObjects[self.idxBlockType][self.idxBlockDegree]
-            self.tempBlk = self.iScreen.clip(self.top, self.left, self.top+self.currBlk.get_dy(), self.left+self.currBlk.get_dx())
+            self.set_blocks()
 
         self.tempBlk = self.tempBlk + self.currBlk
 
